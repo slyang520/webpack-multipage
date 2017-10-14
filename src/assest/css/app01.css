@@ -1,0 +1,26 @@
+@import url(./base/reset.css);
+
+@font-face {
+    font-family: 'MyFont';
+    src: url('../font/fontSentyChalk.ttf') format('ttf');
+    font-weight: 100;
+    font-style: normal;
+}
+
+.hello {
+    color: red;
+    font-family: 'MyFont';
+    background: url('../img/logo.png') no-repeat;
+}
+
+/*测试补齐样式 是否生效*/
+/**
+a {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+ */
+a {
+    display: flex;
+}

@@ -1,0 +1,40 @@
+{
+  "name": "application-slyang-web-app",
+  "version": "0.0.1",
+  "description": "slyang-study-webpack",
+  "email": "slyang520@yeah.net",
+  "repository": "",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^7.1.5",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "clean-webpack-plugin": "^0.1.17",
+    "copy-webpack-plugin": "^4.1.1",
+    "css-loader": "^0.28.7",
+    "csv-loader": "^2.1.1",
+    "express": "^4.16.1",
+    "extract-text-webpack-plugin": "^3.0.1",
+    "file-loader": "^1.1.5",
+    "html-webpack-plugin": "^2.30.1",
+    "postcss-loader": "^2.0.7",
+    "style-loader": "^0.19.0",
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "webpack": "^3.6.0",
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-dev-server": "^2.9.1",
+    "webpack-merge": "^4.1.0",
+    "xml-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "lodash": "^4.17.4"
+  },
+  "scripts": {
+    "server": "node server.js",
+    "start": "webpack-dev-server --open --config config/webpack.dev.js",
+    "build-dev": "webpack --config config/webpack.dev.js",
+    "build-prod": "webpack --config config/webpack.prod.js"
+  }
+}
