@@ -2,10 +2,12 @@
  * Created by slyang on 17/10/7.
  */
 
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const rootProject = path.resolve(__dirname, '../');
 const distPath = path.resolve(rootProject, 'dist');
@@ -23,12 +25,25 @@ module.exports = {
     },
     output: {
         filename: 'static/js/[name].bundle.js?[hash]',
+        chunkFilename: 'tttt[id].bundle.js',
         path: distPath
     },
     plugins: [
         new CleanWebpackPlugin([distPath], {
             root: rootProject,
             verbose: true,
+        }),
+        new CopyWebpackPlugin([
+            // webpack 引入的原生JS to  dist/libs
+            {from: resolve('libs'), to: 'libs'},
+            // 原生页面  to的路径在 打包的根目录下
+            {from: resolve('page_native')},
+        ], {
+            ignore: [
+                // Doesn't copy any files with a txt extension
+                '*.md',
+            ],
+            copyUnmodified: true
         }),
         new HtmlWebpackPlugin({ // Generates default index.html
             title: 'default index',
@@ -70,30 +85,30 @@ module.exports = {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
-                    use: ['css-loader','postcss-loader']
+                    use: ['css-loader', 'postcss-loader']
                 })
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: [{
-                        loader: 'file-loader',
-                        options: {
-                            // 10K
-                            // 图片加载器，较小的图片转成 base64
-                            limit: 10000,                            
-                            name: 'static/img/[name].[hash:7].[ext]'
-                        }
-                     }]
+                    loader: 'file-loader',
+                    options: {
+                        // 10K
+                        // 图片加载器，较小的图片转成 base64
+                        limit: 10000,
+                        name: 'static/img/[name].[hash:7].[ext]'
+                    }
+                }]
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use:[{
+                use: [{
                     loader: 'file-loader',
                     options: {
-                        limit: 10000,                        
+                        limit: 10000,
                         name: 'static/font/[name].[hash:7].[ext]'
                     }
-                }]                 
+                }]
             },
             {
                 test: /\.(csv|tsv)$/,
