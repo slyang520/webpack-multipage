@@ -20,7 +20,7 @@ module.exports = {
     entry: {
         appIndex: './src/index.js',
         app01: './src/index.js',
-        app02: './src/print.js',
+        app02: './src/index.js',
         child01: './src/print.js'
     },
     output: {
@@ -85,6 +85,9 @@ module.exports = {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
+                    // 避免找不到样式中的资源  比如图片
+                    // https://github.com/vuejs/vue-loader/issues/481
+                    publicPath: '../../',         // 注意配置这一部分，根据目录结构自由调整
                     use: ['css-loader', 'postcss-loader']
                 })
             },

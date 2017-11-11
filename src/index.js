@@ -3,7 +3,7 @@
  */
 import _ from "lodash";
 import "./assest/css/app01.css";
-import icon from "./assest/img/logo.png";
+import icon from "./assest/img/test/logo.png";
 import Data from "./data.xml";
 import printMe from "./print.js";
 
@@ -40,3 +40,18 @@ console.log(`${test}  es6->es5 success`);
 window.clicktest = clicktest;
 document.body.appendChild(component());
 document.body.appendChild(component2());
+
+
+function refreshMapData(){
+    $.ajax({
+        type: "GET",
+        contentType: "application/json;charset=UTF-8",
+        url: "/test/testPathVariable/12345",
+        dataType: 'json',
+        success: function(result) {
+            console.log(JSON.stringify(result));
+        }
+    });
+}
+
+refreshMapData();
